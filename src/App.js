@@ -5,11 +5,12 @@ function App() {
   const [userMessage, setUserMessage] = useState('');
 
   const sendMessage = () => {
+    const botMessage = "Sert";
     if (userMessage.trim() !== '') {
       setMessages((prevMessages) => [
         ...prevMessages,
         { text: userMessage, sender: 'user' },
-        { text: 'I received your message!', sender: 'bot' },
+        { text: botMessage, sender: 'bot' },
       ]);
       setUserMessage('');
     }
