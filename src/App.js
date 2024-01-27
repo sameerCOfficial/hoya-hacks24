@@ -1,41 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import LoadingIcons from 'react-loading-icons';
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [userMessage, setUserMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const sendMessage = () => {
-    const botMessage = "Sert";
+  useEffect(() => {
+    // Scroll to the bottom of the chat container when messages change
+    const chatContainer = document.getElementById('chat-container');
+    if (chatContainer) {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  }, [messages]);
+
+  const sendUserMessage = async () => {
     if (userMessage.trim() !== '') {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { text: userMessage, sender: 'user' },
-        { text: botMessage, sender: 'bot' },
-      ]);
+      setIsLoading(true);
+
+      // Simulate a delay before the bot responds
+      setTimeout(() => {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: userMessage, sender: 'user', loading: false },
+        ]);
+
+        // Trigger the bot response after the user's message
+        sendBotMessage();
+
+        setIsLoading(false);
+      }, 0);
+
       setUserMessage('');
     }
   };
 
-  const calculateTextColor = () => {
-    const charCount = userMessage.length;
-    const maxChars = 750;
-    const darkness = Math.min(1, charCount / maxChars);
-
-    const hexValue = Math.round(darkness * 255).toString(16).padStart(2, '0');
-    return `#${hexValue}0000`;
+  const sendBotMessage = () => {
+    // Simulate a delay for the bot's response
+    setTimeout(() => {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: 'Sert', sender: 'bot', loading: false },
+      ]);
+    }, 1000);
   };
 
   return (
     <div id="container">
-      <div className="chat-messages">
+      <div id="chat-container" className="chat-messages">
         {messages.map((message, index) => (
           <div key={index} className={`message-bubble ${message.sender}`}>
+            {message.sender === 'bot' && message.loading && (
+              <LoadingIcons.Puff />
+            )}
             {message.text}
           </div>
         ))}
       </div>
       <div className="chat-container">
-        <div className="user-input">
+        <div className="user-input" style={{ backgroundColor: '#121212' }}>
           <div className="input-container">
             <textarea
               id="messageInput"
@@ -47,12 +70,21 @@ function App() {
                 e.target.style.height = e.target.scrollHeight + 'px';
               }}
               maxLength={750}
+              style={{
+                color: 'white',
+                backgroundColor: '#121212',
+                border: '1px solid white',
+                borderRadius: '4px',
+                padding: '8px',
+                boxSizing: 'border-box',
+                resize: 'none',
+              }}
             />
-            <div className="char-counter" style={{ color: calculateTextColor() }}>
+            <div className="char-counter" style={{ color: 'white' }}>
               {userMessage.length}/750
             </div>
           </div>
-          <button id="sendMessageBtn" onClick={sendMessage}>
+          <button id="sendMessageBtn" onClick={sendUserMessage}>
             Send
           </button>
         </div>
