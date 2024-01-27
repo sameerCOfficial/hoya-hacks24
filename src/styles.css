@@ -1,0 +1,114 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100vh;
+}
+
+#root {
+  width: 100%;
+}
+
+#container {
+  /* display: inline-flex; */
+}
+
+.chat-container {
+  margin-left: 2.5vw;
+  width: 95vw;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 3em;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.chat-messages {
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.chat-messages > * {
+  width: fit-content;
+  /* float: right; */
+}
+
+.message-bubble {
+  max-width: 70%;
+  margin: 200px;
+  padding: 12px;
+  border-radius: 12px;
+  word-wrap: break-word;
+  background-color: #057eff;
+  /* align-self: flex-end; */
+  margin-left: auto;
+  margin-right: -0.25em;
+}
+
+.user {
+  background-color: #057eff;
+  color: #fff;
+}
+
+.message-bubble:not(.user) {
+  background-color: #e6e6e8;
+}
+
+/* Add styles for other senders (e.g., bot) if needed */
+
+.user-input {
+  display: flex;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.input-container {
+  flex-grow: 1;
+  display: flex;
+}
+
+#messageInput {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 8px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.char-counter {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  color: #666;
+  font-size: 12px;
+}
+
+#sendMessageBtn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-end;
+  height: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+#sendMessageBtn:hover {
+  background-color: #45a049;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 300px) {
+  
+}
