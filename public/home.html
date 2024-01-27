@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Universities Chat Bot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body {
+      background-image: url('../assets/bg.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;  
+      background-size: cover;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      justify-content: flex;
+      align-items: center;
+    }
+    
+    .wrapper{
+      padding: 60px;
+      text-align: center;
+      font-size: 30px;
+    }
+
+    .swiper {
+      width: 100%;
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 300px;
+      height: 300px;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+    }
+
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 500px;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0; 
+      position: absolute;
+      z-index: 1;
+      top: 105%;
+      align-items: center;
+      left: -40%;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }
+
+    .img-button{
+      border: none;
+      cursor: pointer;
+      appearance: none;
+      background-color: inherit;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class = "wrapper">
+    <h1>Choose Your University!</h1>
+    <p>SertGPT</p>
+  </div>
+  <div class="swiper mySwiper" style = "top:10vh;">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide tooltip">
+        <span class="tooltiptext">University of Maryland, College Park</span>
+        <a href="index.html">
+          <button class = "img-button" type="submit">
+            <img src="../assets/UMD HOYA HACKS TESTUDO.png" />
+          </button>
+        </a>
+      </div>
+      <div class="swiper-slide tooltip">
+        <span class="tooltiptext">[UNAVAILABLE] University of Maryland, Baltimore County</span>
+        <img style = "filter: brightness(30%)" src="../assets/UMBC.png"/>
+      </div>
+      <div class="swiper-slide tooltip">
+        <span class="tooltiptext">[UNAVAILABLE] Georgetown University</span>
+        <img style = "filter: brightness(30%)" src="../assets/UMD HOYA HACKS BULLDOG.png" />
+      </div>
+      <div class="swiper-slide tooltip">
+        <span class="tooltiptext">[UNAVAILABLE] Michigan State University</span>
+        <img style = "filter: brightness(30%)" src="../assets/michigan state.png" />
+      </div>
+      <div class="swiper-slide tooltip">
+        <span class="tooltiptext">[UNAVAILABLE] Virginia State University</span>
+        <img style = "filter: brightness(30%)" src="../assets/VSU.png" />
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 20,
+        stretch: 0,
+        depth: 200,
+        modifier: 1,
+        slideShadows: true,
+      },
+    });
+  </script>
+</body>
+
+</html>
