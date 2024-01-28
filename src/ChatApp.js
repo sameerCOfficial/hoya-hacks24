@@ -7,14 +7,6 @@ function ChatApp() {
   const [userMessage, setUserMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    // Scroll to the bottom of the chat container when messages change
-    const chatContainer = document.getElementById('chat-container');
-    if (chatContainer) {
-      chatContainer.scrollTop = chatContainer.scrollHeight;
-    }
-  }, [messages]);
-
   const sendUserMessage = async () => {
     if (userMessage.trim() !== '') {
       setIsLoading(true);
@@ -23,7 +15,7 @@ function ChatApp() {
       setTimeout(() => {
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: userMessage, sender: 'user', loading: true },
+          { text: userMessage, sender: 'user' },
         ]);
 
         // Trigger the bot response after the user's message
@@ -37,22 +29,66 @@ function ChatApp() {
   };
 
   const sendBotMessage = () => {
+    // Show loading indicator in the same bubble
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      {
+        text: <LoadingIcons.Puff />,
+        sender: 'bot',
+        loading: true,
+        iconPath: '/path/to/your/image.png', // Replace with the actual file path
+      },
+    ]);
+  
     // Simulate a delay for the bot's response
     setTimeout(() => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { text: 'Sert', sender: 'bot', loading: false },
-      ]);
-    }, 1000);
+      setMessages((prevMessages) => {
+        // Replace the loading indicator with the actual response
+        const updatedMessages = [...prevMessages];
+        const loadingMessageIndex = updatedMessages.findIndex(
+          (message) => message.loading && message.sender === 'bot'
+        );
+  
+        if (loadingMessageIndex !== -1) {
+          updatedMessages[loadingMessageIndex] = {
+            text: 'SertSertSertSert...SertSertSertSert...SertSertSertSert...SertSertSertSert...SertSertSertSert...SertSertSertSert...SertSertSertSert...', // Replace with your actual response
+            sender: 'bot',
+            iconPath: '/assets/maryland_logo.pg', // Replace with the actual file path
+          };
+        }
+  
+        return updatedMessages;
+      });
+    }, 2000);
   };
+  
+
+  useEffect(() => {
+    // Scroll to the bottom of the chat container when messages change
+    const chatContainer = document.getElementById('chat-container');
+    if (chatContainer) {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  }, [messages]);
 
   return (
     <div id="container">
       <div id="chat-container" className="chat-messages">
         {messages.map((message, index) => (
           <div key={index} className={`message-bubble ${message.sender}`}>
-            {message.loading && <LoadingIcons.Puff />} {/* Loading indicator */}
-            {message.text}
+            {message.sender === 'bot' && message.loading && (
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                {message.text}
+              </div>
+            )}
+            {message.sender === 'bot' && !message.loading && (
+              <div className="bot-messages">
+                {message.icon && <div className="icon-container">{message.icon}</div>}
+               <div>{message.text}</div>
+            </div>
+            )}
+
+            {message.sender !== 'bot' && <div>{message.text}</div>}
           </div>
         ))}
       </div>
