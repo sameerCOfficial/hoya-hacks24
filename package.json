@@ -9,7 +9,7 @@
   "dependencies": {
     "@langchain/community": "^0.0.21",
     "@langchain/openai": "^0.0.13",
-    "langchain": "0.0.207",
+    "langchain": "^0.0.207",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
